@@ -4,18 +4,26 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
+import { useRouter } from "next/router";
+
+
+
 
 function NavBar() {
   const { logout, isAuthenticated } = useAuth();
   const pathname = usePathname();
   const [dropdownOpen, setDropdownOpen] = useState(false);
-
+   const router = useRouter
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
   };
 
+  const goToprofile = () =>{
+    router.push ("/admin/perfil")
+  }
+
   return (
-    <div className="py-4 fixed px-6 bg-green-700 w-full h-[15%] text-center font-bold text-xl flex justify-end shadow-xl rounded-b-lg border-gray-950 border-2">
+    <div className="py-4 fixed px-6  w-full h-[15%] text-center font-bold text-xl flex justify-end shadow-xl rounded-b-lg border-gray-950 border-2">
       {isAuthenticated ? (
         <div className="flex justify-between w-full items-center">
           <Image
@@ -28,28 +36,28 @@ function NavBar() {
           />
           <nav>
             <ul className="flex h-full items-center gap-10">
-              <li><Link href="/admin/usuarios" className={`text-lg ${pathname === "/admin/usuarios" ? 'text-black' : 'text-white hover:text-gray-950'}`}>Usuarios</Link></li>
-              <li><Link href="/admin/apartamentos" className={`text-lg ${pathname === "/admin/apartamentos" ? 'text-black' : 'text-white hover:text-gray-950'}`}>Apartamentos</Link></li>
-              <li><Link href="/admin/propietarios" className={`text-lg ${pathname === "/admin/propietarios" ? 'text-black' : 'text-white hover:text-gray-950'}`}>Propietarios</Link></li>
-              <li><Link href="/admin/pagos" className={`text-lg ${pathname === "/admin/pagos" ? 'text-black' : 'text-white hover:text-gray-950'}`}>Pagos</Link></li>
-              <li><Link href="/admin/informes" className={`text-lg ${pathname === "/admin/informes" ? 'text-black' : 'text-white hover:text-gray-950'}`}>Informes</Link></li>
-              <li><Link href="/admin/visitas" className={`text-lg ${pathname === "/admin/visitas" ? 'text-black' : 'text-white hover:text-gray-950'}`}>Visitantes</Link></li>
+              <li><Link href="/admin/usuarios" className={`text-lg ${pathname === "/admin/usuarios" ? 'text-black' : 'text-green-700 hover:text-gray-950'}`}>Usuarios</Link></li>
+              <li><Link href="/admin/apartamentos" className={`text-lg ${pathname === "/admin/apartamentos" ? 'text-black' : 'text-green-700 hover:text-gray-950'}`}>Apartamentos</Link></li>
+              <li><Link href="/admin/propietarios" className={`text-lg ${pathname === "/admin/propietarios" ? 'text-black' : 'text-green-700 hover:text-gray-950'}`}>Propietarios</Link></li>
+              <li><Link href="/admin/pagos" className={`text-lg ${pathname === "/admin/pagos" ? 'text-black' : 'text-green-700 hover:text-gray-950'}`}>Pagos</Link></li>
+              <li><Link href="/admin/informes" className={`text-lg ${pathname === "/admin/informes" ? 'text-black' : 'text-green-700 hover:text-gray-950'}`}>Informes</Link></li>
+              <li><Link href="/admin/visitas" className={`text-lg ${pathname === "/admin/visitas" ? 'text-black' : 'text-green-700 hover:text-gray-950'}`}>Visitantes</Link></li>
             </ul>
           </nav>
-          <div className="relative bg-green-700 rounded-full">
+          <div className="relative  ">
             <Image
-              src="https://i.pinimg.com/736x/24/d8/9b/24d89b2ebde80c8098f7525f55267686.jpg"
+              src="https://i.pinimg.com/736x/cc/f2/75/ccf275f72d52ab46745cfb99affc4bc5.jpg"
               alt="Menú"
               width={50}
               height={50}
-              className="cursor-pointer  border "
+              className="cursor-pointer  border-none "
               onClick={toggleDropdown}
             />
             {dropdownOpen && (
               <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10">
                 <ul className="py-2">
                   <li>
-                    <Link href="/perfil" className="block px-4 py-2 text-gray-800 hover:bg-gray-200">Ir al Perfil</Link>
+                    <Link href="/admin/perfil" className="block px-4 py-2 text-gray-800 hover:bg-gray-200">Ir al Perfil</Link>
                   </li>
                   <li>
                     <button onClick={logout} className="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-200">Cerrar Sesión</button>
